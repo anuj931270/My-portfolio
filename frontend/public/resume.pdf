@@ -1,0 +1,56 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 2118 >>
+stream
+BT /F2 20 Tf 50 740 Td (ANUJ PATHAK) Tj ET
+BT /F1 11 Tf 50 720 Td (Data Scientist | AI/ML Engineer | Freelancer) Tj ET
+BT /F1 10 Tf 50 705 Td (Email: pathakanuj322@gmail.com | Phone: +91 7479931270 | Location: Gurugram, India) Tj ET
+BT /F1 10 Tf 50 690 Td (GitHub: github.com/anuj931270 | LinkedIn: linkedin.com/in/anuj-kumar6702/) Tj ET
+BT /F2 13 Tf 50 665 Td (PROFESSIONAL SUMMARY) Tj ET
+BT /F1 10 Tf 50 648 Td (Data Scientist with 3+ years experience building end-to-end Machine Learning, Deep Learning,) Tj ET
+BT /F1 10 Tf 50 634 Td (and Generative AI solutions. Skilled in RAG apps with LangChain, vector DBs, and agentic workflows.) Tj ET
+BT /F2 13 Tf 50 605 Td (WORK EXPERIENCE) Tj ET
+BT /F2 11 Tf 50 588 Td (Arcgate Technologies - Data Scientist & AI/ML Engineer \(May 2024 - Present\)) Tj ET
+BT /F1 9.5 Tf 60 572 Td (- Built stateful multi-agent HR chatbot in LangGraph with tool calling, MCP server, and human-in-the-loop.) Tj ET
+BT /F1 9.5 Tf 60 558 Td (- Developed MCP server with role-based access control and guardrails for enterprise policy access.) Tj ET
+BT /F1 9.5 Tf 60 544 Td (- Implemented RAG chatbots using LangChain, OpenAI API, and Pinecone vector retrieval.) Tj ET
+BT /F1 9.5 Tf 60 530 Td (- Trained LSTM sentiment analysis models in TensorFlow and demand forecasting with XGBoost/AdaBoost.) Tj ET
+BT /F1 9.5 Tf 60 516 Td (- Containerized models with Docker and deployed scalable FastAPI services on AWS and Azure.) Tj ET
+BT /F2 13 Tf 50 488 Td (CORE TECHNICAL SKILLS) Tj ET
+BT /F1 9.5 Tf 50 470 Td (Agentic & GenAI: AI Agents, LangGraph, MCP Servers, Tool Calling, RAG, OpenAI API, LangChain, Pinecone) Tj ET
+BT /F1 9.5 Tf 50 456 Td (Machine Learning & DL: TensorFlow, PyTorch, Scikit-learn, XGBoost, Random Forest, LSTM, BERT, Transformers) Tj ET
+BT /F1 9.5 Tf 50 442 Td (Cloud & MLOps: FastAPI, Docker, Kubernetes, AWS \(EC2, S3, SageMaker\), Azure \(AKS\), CI/CD, MySQL) Tj ET
+BT /F2 13 Tf 50 414 Td (EDUCATION) Tj ET
+BT /F2 11 Tf 50 396 Td (B.Tech in Computer Science and Engineering \(2020 - 2024\)) Tj ET
+BT /F1 10 Tf 50 382 Td (Rajasthan Technical University, Udaipur, Rajasthan) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000002421 00000 n 
+0000002491 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2566
+%%EOF

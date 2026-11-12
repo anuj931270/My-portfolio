@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Anuj Pathak | Data Scientist &amp; AI/ML Engineer | Portfolio</title>
+    <meta name="title" content="Anuj Pathak | Data Scientist &amp; AI/ML Engineer | Portfolio" />
+    <meta name="description" content="Portfolio of Anuj Pathak - Data Scientist and AI/ML Engineer specializing in Agentic AI (LangGraph, MCP), Enterprise RAG with Pinecone, Deep Learning, and production FastAPI &amp; Docker systems. Available for freelance projects." />
+    <meta name="keywords" content="Anuj Pathak, Data Scientist, AI Engineer, Machine Learning, Agentic AI, LangGraph, MCP Server, Generative AI, RAG, Python, FastAPI, Docker, Freelance AI Engineer, Gurugram" />
+    <meta name="author" content="Anuj Pathak" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://anujpathak.dev" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://anujpathak.dev/" />
+    <meta property="og:title" content="Anuj Pathak | Data Scientist &amp; AI/ML Engineer | Portfolio" />
+    <meta property="og:description" content="Data Scientist with 3+ years experience building end-to-end Machine Learning, Deep Learning and Generative AI solutions. Available for freelance AI consulting." />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta property="og:site_name" content="Anuj Pathak Portfolio" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://anujpathak.dev/" />
+    <meta name="twitter:title" content="Anuj Pathak | Data Scientist &amp; AI/ML Engineer" />
+    <meta name="twitter:description" content="Specializing in Agentic AI, Enterprise RAG, Deep Learning, and production MLOps. Available for freelance work." />
+    <meta name="twitter:image" content="/og-image.svg" />
+
+    <!-- Pre-load Theme Script to Prevent Flash of Wrong Theme (FOUC) -->
+    <script>
+      (function() {
+        try {
+          var mode = localStorage.getItem('theme-mode') || 'system';
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = mode === 'dark' || (mode === 'system' && prefersDark);
+          var root = document.documentElement;
+          root.classList.remove('dark', 'light');
+          root.classList.add(isDark ? 'dark' : 'light');
+
+          var presets = {
+            blue: '#3b82f6',
+            purple: '#a855f7',
+            green: '#10b981',
+            orange: '#f97316',
+            pink: '#ec4899',
+            cyan: '#06b6d4'
+          };
+          var accent = localStorage.getItem('theme-accent') || 'purple';
+          var custom = localStorage.getItem('theme-custom-accent') || '#8b5cf6';
+          var color = accent === 'custom' ? custom : (presets[accent] || presets.purple);
+
+          // Helper to convert hex to RGB
+          var cleanHex = color.replace('#', '');
+          if (cleanHex.length === 3) {
+            cleanHex = cleanHex.split('').map(function(c) { return c + c; }).join('');
+          }
+          var r = parseInt(cleanHex.substring(0, 2), 16) || 168;
+          var g = parseInt(cleanHex.substring(2, 4), 16) || 85;
+          var b = parseInt(cleanHex.substring(4, 6), 16) || 247;
+
+          root.style.setProperty('--accent-color', color);
+          root.style.setProperty('--accent-rgb', r + ', ' + g + ', ' + b);
+          root.style.setProperty('--accent-light', 'rgba(' + r + ', ' + g + ', ' + b + ', 0.12)');
+          root.style.setProperty('--accent-border', 'rgba(' + r + ', ' + g + ', ' + b + ', 0.3)');
+          root.style.setProperty('--accent-glow', 'rgba(' + r + ', ' + g + ', ' + b + ', 0.25)');
+          root.style.setProperty('--accent-gradient', 'linear-gradient(135deg, ' + color + ', #6366f1)');
+        } catch (e) {
+          console.error(e);
+        }
+      })();
+    </script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anuj Pathak",
+        "jobTitle": "Data Scientist & AI/ML Engineer",
+        "url": "https://anujpathak.dev",
+        "sameAs": [
+          "https://github.com/anuj931270",
+          "https://www.linkedin.com/in/anuj-kumar6702/"
+        ],
+        "knowsAbout": [
+          "Machine Learning",
+          "Deep Learning",
+          "Generative AI",
+          "Agentic AI",
+          "LangGraph",
+          "Model Context Protocol",
+          "FastAPI",
+          "Docker",
+          "Python"
+        ]
+      }
+    </script>
+
+    <!-- Google Fonts with Display Swap for Lighthouse Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
