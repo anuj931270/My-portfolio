@@ -185,3 +185,4 @@ Now that your frontend has a live production URL:
 ### 3. Database Connection Errors on Startup
 - Verify your database host permits remote connections from `0.0.0.0/0`.
 - Verify database password encoding if it includes special characters (`@`, `:`, `/`).
+
