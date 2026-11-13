@@ -5,6 +5,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import ThemeSettings from './components/ThemeSettings'
 import LoadingScreen from './components/LoadingScreen'
 import FloatingActions from './components/FloatingActions'
+import ChatWidget from './components/ChatWidget'
 import TechTicker from './components/TechTicker'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -229,6 +230,9 @@ export default function App() {
 
         {/* Global Floating Theme Settings Controller */}
         <ThemeSettings />
+
+        {/* Ask Anuj AI Chat Widget (Bottom Right Corner) */}
+        <ChatWidget apiBaseUrl={API_BASE_URL} />
       </Router>
     </ThemeProvider>
   )

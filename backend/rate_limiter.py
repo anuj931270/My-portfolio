@@ -53,6 +53,7 @@ class InMemoryRateLimiter:
 contact_limiter = InMemoryRateLimiter(max_requests=5, window_seconds=60)
 inquiry_limiter = InMemoryRateLimiter(max_requests=5, window_seconds=60)
 auth_limiter = InMemoryRateLimiter(max_requests=6, window_seconds=60)
+chat_limiter = InMemoryRateLimiter(max_requests=10, window_seconds=60)
 
 
 def rate_limit(limiter: InMemoryRateLimiter) -> Callable:

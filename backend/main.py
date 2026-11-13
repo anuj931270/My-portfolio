@@ -33,8 +33,9 @@ from security import (
     get_current_admin,
     verify_password,
 )
-from rate_limiter import contact_limiter, inquiry_limiter, auth_limiter, rate_limit
+from rate_limiter import contact_limiter, inquiry_limiter, auth_limiter, chat_limiter, rate_limit
 from notifier import send_contact_notification, send_inquiry_notification
+from rag_service import rag_engine
 
 load_dotenv()
 
@@ -240,6 +241,7 @@ def read_root():
             "project_detail": "GET /api/projects/{id}",
             "contact_form": "POST /api/contact",
             "inquiry_form": "POST /api/inquiry",
+            "ai_chat": "POST /api/chat",
             "admin_login": "POST /api/admin/login",
             "admin_messages": "GET /api/admin/messages (JWT)",
             "admin_inquiries": "GET /api/admin/inquiries (JWT)",
@@ -546,6 +548,59 @@ def create_inquiry(
 
 
 # ==========================================
+# 5. POST /api/chat - "Ask Anuj" AI Assistant (RAG + LangChain)
+# ==========================================
+@app.post(
+    "/api/chat",
+    response_model=schemas.ChatResponse,
+    dependencies=[Depends(rate_limit(chat_limiter))],
+    tags=["AI Assistant"],
+)
+def chat_with_assistant(
+    chat_req: schemas.ChatRequest,
+    request: Request,
+    db: Session = Depends(get_db),
+):
+    """
+    RAG-powered conversational AI assistant answering questions regarding Anuj Pathak's
+    experience, skills, projects, services, and freelance availability.
+    Enforces sliding-window rate limiting (10 req/min) and max 500 characters input limit.
+    Saves conversation logs into MySQL (chat_logs table).
+    """
+    client_ip = request.headers.get("X-Forwarded-For") or (
+        request.client.host if request.client else "unknown"
+    )
+
+    try:
+        reply, suggestions = rag_engine.answer_query(chat_req.message)
+
+        # Persist conversation log in MySQL
+        try:
+            chat_log = models.ChatLog(
+                user_message=chat_req.message.strip(),
+                bot_response=reply,
+                client_ip=client_ip,
+            )
+            db.add(chat_log)
+            db.commit()
+            logger.info(f"Recorded chat query from {client_ip} (Log #{chat_log.id})")
+        except Exception as log_err:
+            db.rollback()
+            logger.warning(f"Could not persist chat interaction log: {log_err}")
+
+        return {
+            "reply": reply,
+            "suggested_questions": suggestions,
+        }
+    except Exception as exc:
+        logger.error(f"Chat execution failed: {exc}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to generate AI response. Please try again shortly.",
+        )
+
+
+# ==========================================
 # Protected Admin Data Endpoints
 # ==========================================
 @app.get(
@@ -638,6 +693,27 @@ def delete_inquiry_admin(
     db.commit()
     logger.info(f"Admin '{admin['username']}' deleted inquiry #{inquiry_id}")
     return {"message": f"Inquiry #{inquiry_id} deleted successfully.", "success": True}
+
+
+@app.get(
+    "/api/admin/chat-logs",
+    response_model=List[schemas.ChatLogResponse],
+    tags=["Admin"],
+)
+def get_chat_logs_admin(
+    admin: dict = Depends(get_current_admin),
+    db: Session = Depends(get_db),
+):
+    """
+    Retrieve conversation logs recorded by the Ask Anuj AI assistant (Admin only via JWT).
+    """
+    try:
+        return db.query(models.ChatLog).order_by(models.ChatLog.created_at.desc()).limit(150).all()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Database query error: {str(exc)}",
+        )
 
 
 # Keep convenient backward compatibility for /api/messages and /api/inquiry GET

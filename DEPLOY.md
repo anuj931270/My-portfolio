@@ -92,6 +92,7 @@ You can use any cloud-hosted MySQL 8.0+ service. **TiDB Cloud Serverless** and *
    | `SMTP_FROM_EMAIL` | `pathakanuj322@gmail.com` | Sender header |
    | `SMTP_TO_EMAIL` | `pathakanuj322@gmail.com` | Recipient address for inquiries |
    | `SMTP_TLS` | `true` | Enable STARTTLS |
+   | `OPENAI_API_KEY` | `sk-...` *(optional)* | OpenAI API Key for "Ask Anuj" LangChain + FAISS RAG (fallback retriever activates if left unset) |
 
    > [!TIP]
    > You can generate a secure `JWT_SECRET_KEY` with:
@@ -168,7 +169,7 @@ Now that your frontend has a live production URL:
 8. **Admin Dashboard / API**:
    - Access `https://anuj-portfolio-backend.onrender.com/docs`
    - Test `POST /api/admin/login` using your configured admin credentials
-   - Call `GET /api/admin/messages` and `GET /api/admin/inquiries` with your Bearer token to inspect submissions.
+   - Call `GET /api/admin/messages` and `GET /api/admin/inquiries, and GET /api/admin/chat-logs` with your Bearer token to inspect submissions.
 
 ---
 

@@ -230,3 +230,4 @@ export default function SkillsSphere({ skills = [] }) {
     </div>
   )
 }
+

@@ -176,6 +176,41 @@ class TestPortfolioBackend(unittest.TestCase):
         self.assertTrue(cors_middleware.is_allowed_origin("http://172.16.0.4:3000"))
         self.assertTrue(cors_middleware.is_allowed_origin("https://myportfolio.example.com"))
 
+    def test_chat_request_validation(self):
+        # Valid chat query
+        req = schemas.ChatRequest(message="What projects has Anuj built?")
+        self.assertEqual(req.message, "What projects has Anuj built?")
+
+        # Empty message fails
+        with self.assertRaises(ValidationError):
+            schemas.ChatRequest(message="")
+
+        # Message exceeding max_length of 500 characters fails
+        with self.assertRaises(ValidationError):
+            schemas.ChatRequest(message="a" * 501)
+
+    def test_rag_guardrail_filters_off_topic_questions(self):
+        from rag_service import rag_engine, OUT_OF_SCOPE_RESPONSE
+
+        # Off-topic requests must trigger polite refusal
+        reply, suggestions = rag_engine.answer_query("What is the capital of France?")
+        self.assertEqual(reply, OUT_OF_SCOPE_RESPONSE)
+
+        reply2, _ = rag_engine.answer_query("Write a python script to solve leetcode 42 trapping rain water")
+        self.assertEqual(reply2, OUT_OF_SCOPE_RESPONSE)
+
+    def test_rag_answers_relevant_portfolio_questions(self):
+        from rag_service import rag_engine
+
+        # Relevant queries must produce factual responses
+        reply, suggestions = rag_engine.answer_query("What projects has Anuj built?")
+        self.assertIn("Customer Support", reply)
+        self.assertIn("HR Policy", reply)
+        self.assertTrue(len(suggestions) > 0)
+
+        reply2, _ = rag_engine.answer_query("Is Anuj available for freelance work?")
+        self.assertTrue("available" in reply2.lower() or "freelance" in reply2.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

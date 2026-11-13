@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -185,3 +185,33 @@ class HealthResponse(BaseModel):
 class StatusMessageResponse(BaseModel):
     message: str
     success: bool = True
+
+
+# ==========================================
+# AI Chat Widget ("Ask Anuj") Schemas
+# ==========================================
+class ChatRequest(BaseModel):
+    message: str = Field(
+        ...,
+        min_length=1,
+        max_length=500,
+        description="User query for Ask Anuj AI assistant (strictly max 500 chars)",
+        examples=["What projects has Anuj built?"],
+    )
+
+
+class ChatResponse(BaseModel):
+    reply: str
+    suggested_questions: Optional[List[str]] = None
+    sources: Optional[List[str]] = None
+
+
+class ChatLogResponse(BaseModel):
+    id: int
+    user_message: str
+    bot_response: str
+    client_ip: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True

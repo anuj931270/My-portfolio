@@ -12,11 +12,12 @@ my-portfolio/
 │   ├── venv/                   # Python virtual environment
 │   ├── database.py             # SQLAlchemy engine & session management
 │   ├── main.py                 # FastAPI application & REST endpoints
-│   ├── models.py               # Database models (Projects, Messages, Inquiries)
+│   ├── models.py               # Database models (Projects, Messages, Inquiries, ChatLogs)
 │   ├── schemas.py              # Pydantic v2 validation schemas
 │   ├── security.py             # PBKDF2 hashing, JWT token creation & bearer auth
 │   ├── rate_limiter.py         # Sliding-window IP rate limiting
 │   ├── notifier.py             # Asynchronous SMTP HTML & text email alerts
+│   ├── rag_service.py          # LangChain + FAISS vector store & RAG engine
 │   ├── seed.py                 # MySQL seeding script for projects
 │   ├── test_suite.py           # Backend unit test suite (schemas, auth, limiter)
 │   ├── requirements.txt        # Backend dependencies
@@ -114,6 +115,17 @@ my-portfolio/
 
 6. **Health Check & Monitoring Endpoints**:
    - `GET /health` and `GET /api/health`: validates live server status, server uptime in seconds, ISO timestamp, API version, and live MySQL database connectivity (`SELECT 1`).
+
+7. **"Ask Anuj" AI Chat Assistant (LangChain + FAISS RAG)**:
+   - Floating interactive assistant in the bottom-right corner powered by `POST /api/chat`.
+   - **Vector Knowledge Base**: Indexes Anuj's complete work history, 4 featured enterprise projects, 67 skills across 8 domains, freelance engagement tiers, and contact channels using LangChain and a FAISS in-memory vector store.
+   - **Guardrails**: Intelligently rejects off-topic queries (general trivia, coding challenges, math, homework) with polite guidance directing users to ask about Anuj's portfolio.
+   - **Bill & Abuse Protection**:
+     - Client IP sliding-window rate limiting: 10 requests / 60 seconds.
+     - Strict 500-character input length limit enforced on both frontend and backend.
+     - `OPENAI_API_KEY` stored exclusively in the backend `.env` (never exposed to frontend bundle).
+     - Intelligent semantic fallback retriever if `OPENAI_API_KEY` is not configured, ensuring zero downtime.
+   - **MySQL Audit Logging**: Every conversation (user prompt, bot response, client IP, timestamp) is logged to the `chat_logs` table, viewable via `GET /api/admin/chat-logs`.
 
 ---
 

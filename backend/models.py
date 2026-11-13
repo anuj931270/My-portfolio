@@ -40,3 +40,13 @@ class Inquiry(Base):
     timeline = Column(String(100), nullable=False)
     details = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class ChatLog(Base):
+    __tablename__ = "chat_logs"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    user_message = Column(Text, nullable=False)
+    bot_response = Column(Text, nullable=False)
+    client_ip = Column(String(50), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)

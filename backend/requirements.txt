@@ -4,3 +4,8 @@ sqlalchemy
 pymysql
 python-dotenv
 pyjwt
+openai
+langchain
+langchain-community
+langchain-openai
+faiss-cpu
